@@ -4,7 +4,7 @@
 
 ## Introduction
 
-A Python example for using [Spectrico's car color classifier](http://spectrico.com/car-color-recognition.html). It consists of object detector for finding the cars, and a classifier to recognize the colors of the detected cars. The object detector is an implementation of YOLOv3 (OpenCV DNN backend). It doesn't use GPU and one frame takes 1s to process on Intel Core i5-7600 CPU. YOLOv3 weights were downloaded from [YOLO website](https://pjreddie.com/darknet/yolo/). The classifier is based on Mobilenet v2 (TensorFlow backend). It takes 35 milliseconds on Intel Core i5-7600 CPU for single classification. It can be accelerated more by running on GPU and using batching. This classifier is not accurate enough yet and serves as a proof-of-concept demo.
+A Python example for using [Spectrico's car color classifier](http://spectrico.com/car-color-recognition.html). It consists of an object detector for finding the cars, and a classifier to recognize the colors of the detected cars. The object detector is an implementation of YOLOv3 (OpenCV DNN backend). It doesn't use GPU and one frame takes 1s to process on Intel Core i5-7600 CPU. YOLOv3 weights were downloaded from [YOLO website](https://pjreddie.com/darknet/yolo/). The classifier is based on MobileNet (TensorFlow backend). It takes 35 milliseconds on Intel Core i5-7600 CPU for single classification. It can be accelerated more by running on GPU and using batching.
 
 ---
 ## Object Detection and Classification in images
@@ -66,4 +66,4 @@ The YOLOv3 object detector is from: [YOLO: Real-Time Object Detection](https://p
   year={2018}
 }
 ```
-The car color classifier is based on MobileNetV2 mobile architecture: [MobileNetV2: Inverted Residuals and Linear Bottlenecks](https://arxiv.org/abs/1801.04381)
+The car color classifier is based on MobileNet neural network architecture: [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861)
