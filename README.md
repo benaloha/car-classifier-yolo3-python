@@ -56,6 +56,7 @@ classifier_input_size = (224, 224)
 ---
 ## Credits
 The examples are based on the tutorial by Adrian Rosebrock: [YOLO object detection with OpenCV](https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/)
+
 The YOLOv3 object detector is from: [YOLO: Real-Time Object Detection](https://pjreddie.com/darknet/yolo/)
 
 ```
@@ -66,4 +67,13 @@ The YOLOv3 object detector is from: [YOLO: Real-Time Object Detection](https://p
   year={2018}
 }
 ```
+
 The car color classifier is based on MobileNet neural network architecture: [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861)
+```
+@article{howard2017mobilenets,
+  title={Mobilenets: Efficient convolutional neural networks for mobile vision applications},
+  author={Howard, Andrew G and Zhu, Menglong and Chen, Bo and Kalenichenko, Dmitry and Wang, Weijun and Weyand, Tobias and Andreetto, Marco and Adam, Hartwig},
+  journal={arXiv preprint arXiv:1704.04861},
+  year={2017}
+}
+```
