@@ -10,6 +10,7 @@ import time
 import cv2
 import os
 import color_classifier
+import model_classifier
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -23,7 +24,8 @@ ap.add_argument("-t", "--threshold", type=float, default=0.3,
 	help="threshold when applying non-maxima suppression")
 args = vars(ap.parse_args())
 
-car_color_classifier = color_classifier.Classifier()
+color_classifier = color_classifier.Classifier()
+model_classifier = model_classifier.Classifier()
 
 # load the COCO class labels our YOLO model was trained on
 labelsPath = os.path.sep.join([args["yolo"], "coco.names"])
@@ -117,17 +119,20 @@ if len(idxs) > 0:
 		color = [int(c) for c in COLORS[classIDs[i]]]
 		if classIDs[i] == 2:
 			start = time.time()
-			result = car_color_classifier.predict(image[max(y,0):y + h, max(x,0):x + w])
+			color_result = color_classifier.predict(image[max(y,0):y + h, max(x,0):x + w])
+			model_result = model_classifier.predict(image[max(y,0):y + h, max(x,0):x + w])			
 			end = time.time()
 			# show timing information on MobileNet classifier
 			print("[INFO] classifier took {:.6f} seconds".format(end - start))
-			text = "{}: {:.4f}".format(result[0]['color'], float(result[0]['prob']))
-			cv2.putText(image, text, (x + 2, y + 20), cv2.FONT_HERSHEY_SIMPLEX,
-						0.6, color, 2)
+
+			color_text = "{}: {:.4f}".format(color_result[0]['color'], float(color_result[0]['prob']))
+			cv2.putText(image, color_text, (x + 2, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+
+			model_text = "{}: {:.4f}".format(model_result[0]['make'], float(model_result[0]['prob']))
+			cv2.putText(image, model_text, (x + 2, y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			cv2.putText(image, model_result[0]['model'], (x + 2, y + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+
 		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
-		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
-			0.5, color, 2)
 
 # output image
 cv2.imwrite("data/output.jpg", image)
