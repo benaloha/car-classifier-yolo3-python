@@ -9,7 +9,7 @@ import argparse
 import time
 import cv2
 import os
-import classifier
+import color_classifier
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -23,7 +23,7 @@ ap.add_argument("-t", "--threshold", type=float, default=0.3,
 	help="threshold when applying non-maxima suppression")
 args = vars(ap.parse_args())
 
-car_color_classifier = classifier.Classifier()
+car_color_classifier = color_classifier.Classifier()
 
 # load the COCO class labels our YOLO model was trained on
 labelsPath = os.path.sep.join([args["yolo"], "coco.names"])

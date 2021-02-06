@@ -16,6 +16,4 @@ RUN pip install Pillow
 COPY . /opt/car
 WORKDIR /opt/car
 
-VOLUME /opt/car/data
-
-CMD python car_color_classifier_yolo3.py -i cars.jpg
+CMD python car_classifier_yolo3.py -i data/mg6-china-1.jpg
