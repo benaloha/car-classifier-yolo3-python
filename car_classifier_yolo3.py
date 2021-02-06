@@ -129,10 +129,5 @@ if len(idxs) > 0:
 		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
 			0.5, color, 2)
 
-# show the output image
-#cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
-#cv2.resizeWindow('Image', W, H)
-#cv2.imshow("Image", image)
+# output image
 cv2.imwrite("data/output.jpg", image)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
