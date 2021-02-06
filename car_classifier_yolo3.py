@@ -33,8 +33,7 @@ LABELS = open(labelsPath).read().strip().split("\n")
 
 # initialize a list of colors to represent each possible class label
 np.random.seed(42)
-COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
-	dtype="uint8")
+COLORS = np.random.randint(0, 195, size=(len(LABELS), 3), dtype="uint8")
 
 # derive the paths to the YOLO weights and model configuration
 weightsPath = os.path.sep.join([args["yolo"], "yolov3.weights"])
@@ -126,11 +125,11 @@ if len(idxs) > 0:
 			print("[INFO] classifier took {:.6f} seconds".format(end - start))
 
 			color_text = "{}: {:.4f}".format(color_result[0]['color'], float(color_result[0]['prob']))
-			cv2.putText(image, color_text, (x + 2, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			cv2.putText(image, color_text, (x + 2, y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
 			model_text = "{}: {:.4f}".format(model_result[0]['make'], float(model_result[0]['prob']))
-			cv2.putText(image, model_text, (x + 2, y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
-			cv2.putText(image, model_result[0]['model'], (x + 2, y + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			cv2.putText(image, model_text, (x + 2, y + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			cv2.putText(image, model_result[0]['model'], (x + 2, y + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
 		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 
