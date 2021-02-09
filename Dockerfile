@@ -1,6 +1,4 @@
-#FROM python:3.8-slim-buster
-#RPI --platform=arm64
-FROM python@sha256:c3614bf43d4d0fd20e9eb9efe7d7b430f06bcf59d2f0a093534f703a320ac5c5
+FROM python:3.8-slim-buster
 
 ENV IMG img.jpg
 
