@@ -12,6 +12,11 @@ docker build -t car .
 docker run -it --rm -v /home/ben/projects/car-classifier-yolo3-python/data/:/opt/car/data -e IMG='filenameInDataMap.jpg' car
 `
 
+## Raspberry Ubuntu focal 64 bits
+Gebruik tensorflow build from [repo](https://github.com/benaloha/build)  
+Copy dit whl naar deze repo-root en build de docker image.  
+Misschien kan het inmiddels ook gewoon met pip install tensorflow..  
+
 # Original README
 
 # Car color classification example with YOLOv3 object detector
