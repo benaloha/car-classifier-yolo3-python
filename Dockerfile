@@ -1,4 +1,8 @@
-FROM python:3.8-slim-buster
+#FROM python:3.8-slim-buster
+#RPI --platform=arm64
+FROM python@sha256:c3614bf43d4d0fd20e9eb9efe7d7b430f06bcf59d2f0a093534f703a320ac5c5
+
+ENV IMG img.jpg
 
 RUN apt-get update
 RUN apt-get install -y wget ffmpeg libsm6 libxext6
@@ -15,7 +19,5 @@ RUN pip install Pillow
 
 COPY . /opt/car
 WORKDIR /opt/car
-
-ENV IMG img.jpg
 
 CMD python car_classifier_yolo3.py -i data/${IMG}
