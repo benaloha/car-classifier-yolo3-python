@@ -38,6 +38,10 @@ RUN pip install tensorflow-2.4.0-cp38-none-linux_aarch64.whl
 RUN pip install opencv-python
 RUN pip install Pillow
 
+#Solves Runtime error: ValueError: numpy.ndarray size changed, may indicate binary incompatibility.
+#Strange tensorflow 2.4.0 requires numpy 1.19, but it works..
+RUN pip install numpy==1.20.0
+
 # download models
 #RUN mkdir -p /opt/car/yolo-coco
 WORKDIR /opt/car/yolo-coco
@@ -45,5 +49,8 @@ RUN wget https://pjreddie.com/media/files/yolov3.weights
 
 COPY . /opt/car
 WORKDIR /opt/car
+
+#mv up
+ENV IMG img.jpg
 
 CMD python3 car_classifier_yolo3.py -i data/${IMG}
