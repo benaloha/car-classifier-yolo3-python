@@ -17,7 +17,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get upgrade -y
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install \
 python3 python3-pip \
 gfortran libhdf5-dev libc-ares-dev libeigen3-dev \
-libatlas-base-dev libopenblas-dev libblas-dev liblapack-dev
+libatlas-base-dev libopenblas-dev libblas-dev liblapack-dev \
+wget ffmpeg libsm6 libxext6
 
 RUN pip3 install --upgrade pip
 
@@ -27,8 +28,6 @@ RUN pip install Cython==0.29.21
 RUN pip install h5py
 # upgrade setuptools -> 51.0.0
 RUN pip install --upgrade setuptools
-
-#wget ffmpeg libsm6 libxext6
 
 # tensorflow drama
 RUN mkdir -p /opt/car/yolo-coco
@@ -41,7 +40,6 @@ RUN pip install Pillow
 
 # download models
 #RUN mkdir -p /opt/car/yolo-coco
-RUN apt-get install -y wget
 WORKDIR /opt/car/yolo-coco
 RUN wget https://pjreddie.com/media/files/yolov3.weights
 
