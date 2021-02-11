@@ -30,10 +30,15 @@ RUN pip install h5py
 # upgrade setuptools -> 51.0.0
 RUN pip install --upgrade setuptools
 
-# tensorflow drama
-RUN mkdir -p /opt/car/yolo-coco
-COPY tensorflow-2.4.0-cp38-none-linux_aarch64.whl /opt/car
+# copy repo
+RUN mkdir -p /opt/car
+COPY . /opt/car
 WORKDIR /opt/car
+
+# tensorflow drama
+#RUN mkdir -p /opt/car/yolo-coco
+#COPY tensorflow-2.4.0-cp38-none-linux_aarch64.whl /opt/car
+#WORKDIR /opt/car
 RUN pip install tensorflow-2.4.0-cp38-none-linux_aarch64.whl
 RUN rm *.whl
 
@@ -44,11 +49,12 @@ RUN pip install Pillow
 RUN pip install numpy==1.20.0
 RUN pip cache purge
 
-# download models
-WORKDIR /opt/car/yolo-coco
-RUN wget https://pjreddie.com/media/files/yolov3.weights
+# download models al op fs host gedownload, dan hoeft het niet steed in docker
+# stap te gebeuren, is behoorlijk traak.
+#WORKDIR /opt/car/yolo-coco
+#RUN wget https://pjreddie.com/media/files/yolov3.weights
 
-COPY . /opt/car
-WORKDIR /opt/car
+#COPY . /opt/car
+#WORKDIR /opt/car
 
 CMD python3 car_classifier_yolo3.py -i data/${IMG}
