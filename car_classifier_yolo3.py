@@ -12,6 +12,8 @@ import os
 import color_classifier
 import model_classifier
 
+start = time.time()
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
@@ -113,25 +115,25 @@ if len(idxs) > 0:
 		# extract the bounding box coordinates
 		(x, y) = (boxes[i][0], boxes[i][1])
 		(w, h) = (boxes[i][2], boxes[i][3])
-
 		# draw a bounding box rectangle and label on the image
 		color = [int(c) for c in COLORS[classIDs[i]]]
 		if classIDs[i] == 2:
-			start = time.time()
 			color_result = color_classifier.predict(image[max(y,0):y + h, max(x,0):x + w])
 			model_result = model_classifier.predict(image[max(y,0):y + h, max(x,0):x + w])			
-			end = time.time()
-			# show timing information on MobileNet classifier
-			print("[INFO] classifier took {:.6f} seconds".format(end - start))
 
 			color_text = "{}: {:.4f}".format(color_result[0]['color'], float(color_result[0]['prob']))
 			cv2.putText(image, color_text, (x + 2, y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-			model_text = "{}: {:.4f}".format(model_result[0]['make'], float(model_result[0]['prob']))
-			cv2.putText(image, model_text, (x + 2, y + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
-			cv2.putText(image, model_result[0]['model'], (x + 2, y + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
-
+			make_text = "{}: {:.4f}".format(model_result[0]['make'], float(model_result[0]['prob']))
+			cv2.putText(image, make_text, (x + 2, y + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			model_text = model_result[0]['model']
+			cv2.putText(image, model_text, (x + 2, y + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+			print("[OUTPUT] {}, {}, {}".format(make_text, model_text, color_text))
 		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 
 # output image
 cv2.imwrite("data/output.jpg", image)
+
+# show timing information on MobileNet classifier
+end = time.time()
+print("[INFO] classifier took {:.6f} seconds".format(end - start))

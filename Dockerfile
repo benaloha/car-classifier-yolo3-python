@@ -5,15 +5,15 @@ ENV IMG img.jpg
 RUN apt-get update
 RUN apt-get install -y wget ffmpeg libsm6 libxext6
 
-#Download models as first, when Dockerfile is under development and models don't need to be downloaded every change.
-RUN mkdir -p /opt/car/yolo-coco
-WORKDIR /opt/car/yolo-coco
-RUN wget https://pjreddie.com/media/files/yolov3.weights
-
 RUN pip install --upgrade pip
 RUN pip install tensorflow
 RUN pip install opencv-python
 RUN pip install Pillow
+
+# download models al op fs host gedownload, dan hoeft het niet steeds in docker
+# stap te gebeuren, is behoorlijk traag.
+#WORKDIR /opt/car/yolo-coco
+#RUN wget https://pjreddie.com/media/files/yolov3.weights
 
 COPY . /opt/car
 WORKDIR /opt/car
