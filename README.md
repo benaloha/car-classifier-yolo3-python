@@ -1,3 +1,23 @@
+# Car classification example with YOLOv3 object detector
+
+## Combination of this two repos
+-[Car color classification example with YOLOv3 object detector](https://github.com/spectrico/car-color-classifier-yolo3-python.git)  
+-[Car make, model classification example with YOLOv3 object detector](https://github.com/spectrico/car-make-model-classifier-yolo3-python.git)  
+
+## Use
+`
+docker build -t car .
+`  
+`
+docker run -it --rm -v /home/ubuntu/git/car-classifier-yolo3-python/data/:/opt/car/data -e IMG='filenameInDataMap.jpg' car
+`
+
+## Raspberry Ubuntu focal 64 bits
+Gebruik tensorflow build from [repo](https://github.com/benaloha/build)  
+Copy dit whl naar deze repo-root en build de docker image.  
+
+# Original README
+
 # Car color classification example with YOLOv3 object detector
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
