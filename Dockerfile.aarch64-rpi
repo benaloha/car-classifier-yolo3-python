@@ -33,6 +33,7 @@ RUN pip install --upgrade setuptools
 # tensorflow drama
 RUN mkdir -p /opt/car/yolo-coco
 COPY tensorflow-2.4.0-cp38-none-linux_aarch64.whl /opt/car
+WORKDIR /opt/car
 RUN pip install tensorflow-2.4.0-cp38-none-linux_aarch64.whl
 RUN rm *.whl
 
